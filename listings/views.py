@@ -1,12 +1,16 @@
 from django.shortcuts import render
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 from .models import Listing
 
 
 def index(request):
-    listing = Listing.objects.all()
+    listings = Listing.objects.order_by('-list_data').filter(is_published=True)
+    paginator = Paginator(listings, 6)
+    page = request.GET.get('page')
+    paged_listings = paginator.get_page(page)
     context = {
-        'listings': listing
+        'listings': paged_listings
     }
     return render(request, 'listings/listings.html', context)
 
