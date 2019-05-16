@@ -31,14 +31,14 @@ def contact(request):
         contact.save()
 
         # Send email
-        send_mail(
+        """send_mail(
             'Propery Listing Inquiry',
             'There has been an inquiry for ' + listing +
             '. Sign into admin panel for more into',
             'elmer.rodriguezn@gmail.com',
             [realtor_email, 'sistemas@lym.com.mx'],
             fail_silently=False
-        )
+        )"""
 
         messages.success(
             request, 'Your request has been submitted, a realtor will get back to you soon')
